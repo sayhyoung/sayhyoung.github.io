@@ -3,14 +3,14 @@ var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
 var phrases = [
-  'I love to sing because it\'s fun',
-  'where are you going',
-  'can I call you tomorrow',
-  'why did you talk while I was talking',
-  'she enjoys reading books and playing games',
-  'where are you going',
-  'have a great day',
-  'she sells seashells on the seashore'
+  'What do you want to do',
+  'I want to eat something',
+  'Do you want to eat pizza or cake',
+  'Do you want to play tag or play chess',
+  'The cake looks yummy',
+  'I want one piece',
+  'I want to open this first',
+  'You can vacuum the carpet'
 ];
 
 var phrasePara = document.querySelector('.phrase');
