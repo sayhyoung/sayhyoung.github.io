@@ -3,14 +3,17 @@ var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
 var phrases = [
-  'What do you want to do',
-  'I want to eat something',
-  'Do you want to eat pizza or cake',
-  'Do you want to play tag or play chess',
-  'The cake looks yummy',
-  'I want one piece',
-  'I want to open this first',
-  'You can vacuum the carpet'
+  'A boy had a pet fly.,
+  'where are you going',
+  'can I call you tomorrow',
+  'why did you talk while I was talking',
+  'she enjoys reading books and playing games',
+  'where are you going',
+  'have a great day',
+  'I go to many places in my city',
+  'After school, I go to soccer practice',
+  'There are many ways to get around',
+  'she sells seashells on the seashore'
 ];
 
 var phrasePara = document.querySelector('.phrase');
@@ -55,7 +58,7 @@ function testSpeech() {
     // Each SpeechRecognitionResult object contains SpeechRecognitionAlternative objects that contain individual results.
     // These also have getters so they can be accessed like arrays.
     // The second [0] returns the SpeechRecognitionAlternative at position 0.
-    // We then return the transcript property of the SpeechRecognitionAlternative object 
+    // We then return the transcript property of the SpeechRecognitionAlternative object
     var speechResult = event.results[0][0].transcript.toLowerCase();
     diagnosticPara.textContent = 'Speech received: ' + speechResult + '.';
     if(speechResult === phrase) {
@@ -77,40 +80,40 @@ function testSpeech() {
 
   recognition.onerror = function(event) {
     testBtn.disabled = false;
-    testBtn.textContent = 'Start new test';
-    diagnosticPara.textContent = 'Error occurred in recognition: ' + event.error;
+    testBtn.textContent = '새 문장 낭독하기';
+    diagnost: ' + event.error;
   }
-  
+
   recognition.onaudiostart = function(event) {
       //Fired when the user agent has started to capture audio.
       console.log('SpeechRecognition.onaudiostart');
   }
-  
+
   recognition.onaudioend = function(event) {
       //Fired when the user agent has finished capturing audio.
       console.log('SpeechRecognition.onaudioend');
   }
-  
+
   recognition.onend = function(event) {
       //Fired when the speech recognition service has disconnected.
       console.log('SpeechRecognition.onend');
   }
-  
+
   recognition.onnomatch = function(event) {
       //Fired when the speech recognition service returns a final result with no significant recognition. This may involve some degree of recognition, which doesn't meet or exceed the confidence threshold.
       console.log('SpeechRecognition.onnomatch');
   }
-  
+
   recognition.onsoundstart = function(event) {
       //Fired when any sound — recognisable speech or not — has been detected.
       console.log('SpeechRecognition.onsoundstart');
   }
-  
+
   recognition.onsoundend = function(event) {
       //Fired when any sound — recognisable speech or not — has stopped being detected.
       console.log('SpeechRecognition.onsoundend');
   }
-  
+
   recognition.onspeechstart = function (event) {
       //Fired when sound that is recognised by the speech recognition service as speech has been detected.
       console.log('SpeechRecognition.onspeechstart');
