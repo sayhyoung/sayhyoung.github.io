@@ -3,8 +3,6 @@ var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
 var phrases = [
-  'A boy had a pet fly',
-  'where are you going',
   'can I call you tomorrow',
   'why did you talk while I was talking',
   'she enjoys reading books and playing games',
