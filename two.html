@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>문장 녹음 하기</title>
+
+	<link rel="stylesheet" type="text/css" href="css/two.css">
+
+</head>
+
+<body>
+<h1>Super Fly Guy</h1>
+<p>문장 듣고 따라하기 </p>
+
+
+
+<div id ="img">
+<img class="img1" src="img/cover.jpg" alt="Record Yourself" width="200" height="300">
+</div>
+
+
+
+<div id ="text">
+  <ol class="sentences">
+    <li>A boy had a pet fly.</li>
+    <li>He named him Fly Guy.</li>
+    <li>Fly Guy could say the boy’s name.</li>
+    <li>One day Fly Guy went to school with Buzz.</li>
+    <li>Fly Guy learned about reading and phonics.</li>
+    <li>He learned about art.</li>
+  </ol>
+
+</div>
+
+<div class="container">
+ <img id="signal" src="img/giphy.gif" alt="Record Yourself" width="40" height="30">
+ <button class="btn1" onclick="first.play()">음원</button>
+ <button class="btn2" onclick="second.play()">음원</button>
+ <button class="btn3" onclick="third.play()">음원</button>
+ <button class="btn4" onclick="fourth.play()">음원</button>
+ <button class="btn5" onclick="fifth.play()">음원</button>
+ <button class="btn6" onclick="sixth.play()">음원</button>
+
+
+<button class="btnRec" onclick="recordStop();myFunction1()" id="record-stop-button">Record</button>
+<button class="btnPlay" onclick="playAudio();myFunction2()" disabled id="play-audio-button">Play</button>
+
+
+<!-- <img id="signal2" src="img/giphy.gif" alt="Record Yourself" width="40" height="30">
+
+ <button class="btn5" onclick="recordStop();myFunction3()" id="record-stop-button">Record</button>
+<button class="btn6" onclick="playAudio();myFunction4()" disabled id="play-audio-button">Play</button> -->
+ </div>
+ <a style="position:absolute; top:500px" href="speak-easy-synthesis/index.html">문장 음성인식 테스트 가기</a>
+
+ <a style="position:absolute; top:550px" href="index.html">메인 메뉴로 가기</a>
+
+<script src="index.js"></script>
+</body>
+</html>

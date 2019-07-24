@@ -1,0 +1,88 @@
+body {background-color: white;}
+h1   {color: blue;}
+p    {color: black;font-size:40}
+
+.container 2 {
+  position: absolute;
+  top: 170px;
+}
+
+
+#text {
+  position: relative;
+  left:230px;
+  bottom:300px;
+}
+ol {
+font-style: normal;
+font-size:30;
+color:black;
+font-weight:bold;
+line-height: 2.5;}
+
+#signal {
+display: none;
+  position: absolute;
+  top: 150px;
+  left: 500px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+
+
+
+
+
+
+.btn1 {
+  position:absolute;
+  top: 150px;
+  left: 460px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #555;
+  color: white;
+  font-size: 15px;
+  padding: 5px 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btn2 {
+  position: absolute;
+  top: 150px;
+  left: 570px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: red;
+  color: white;
+  font-size: 15px;
+  padding: 5px 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btn3 {
+  position: absolute;
+  top: 150px;
+  left: 630px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: blue;
+  color: white;
+  font-size: 15px;
+  padding: 5px 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btn1:hover {background-color: gray;}
+.btn2:hover {background-color: gray;}
+.btn3:hover {background-color: gray;}

@@ -2,40 +2,41 @@ var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
+var correct = 0;
+var total = 0;
 var phrases = [
-  'can I call you tomorrow',
-  'why did you talk while I was talking',
-  'she enjoys reading books and playing games',
-  'where are you going',
-  'have a great day',
-  'I go to many places in my city',
-  'After school, I go to soccer practice',
-  'There are many ways to get around',
-  'she sells seashells on the seashore'
+'A boy had a pet fly',
+'He named him Fly Guy',
+'Fly Guy could say the boy\’s name',
+'One day Fly Guy went to school with Buzz',
+'Fly Guy learned about reading and phonics',
+'He learned about art'
 ];
 
 var phrasePara = document.querySelector('.phrase');
 var resultPara = document.querySelector('.result');
 var diagnosticPara = document.querySelector('.output');
-
 var testBtn = document.querySelector('button');
 
-function randomPhrase() {
-  var number = Math.floor(Math.random() * phrases.length);
-  return number;
-}
-
+// function randomPhrase() {
+//   var number = Math.floor(Math.random() * phrases.length);
+//   return number;
+// }
+var i=0;
 function testSpeech() {
   testBtn.disabled = true;
-  testBtn.textContent = 'Test in progress';
+  testBtn.textContent = '녹음 인식 중';
 
-  var phrase = phrases[randomPhrase()];
+
+var phrase=phrases[i];
+var phraseNum=phrase.length;
+i ++;
   // To ensure case consistency while checking with the returned output text
   phrase = phrase.toLowerCase();
   phrasePara.textContent = phrase;
-  resultPara.textContent = 'Right or wrong?';
+  resultPara.textContent = '정답 여부 분석';
   resultPara.style.background = 'rgba(0,0,0,0.2)';
-  diagnosticPara.textContent = '...diagnostic messages';
+  diagnosticPara.textContent = '음성 인식 결과';
 
   var grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrase +';';
   var recognition = new SpeechRecognition();
@@ -47,39 +48,61 @@ function testSpeech() {
   recognition.maxAlternatives = 1;
 
   recognition.start();
-
   recognition.onresult = function(event) {
-    // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
-    // The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
-    // It has a getter so it can be accessed like an array
-    // The first [0] returns the SpeechRecognitionResult at position 0.
-    // Each SpeechRecognitionResult object contains SpeechRecognitionAlternative objects that contain individual results.
-    // These also have getters so they can be accessed like arrays.
-    // The second [0] returns the SpeechRecognitionAlternative at position 0.
-    // We then return the transcript property of the SpeechRecognitionAlternative object
-    var speechResult = event.results[0][0].transcript.toLowerCase();
-    diagnosticPara.textContent = 'Speech received: ' + speechResult + '.';
+
+   var speechResult = event.results[0][0].transcript.toLowerCase();
+    diagnosticPara.textContent = '음성인식 결과: ' + speechResult + '.';
+
+var speechResultNum=speechResult.length;
+var gap =Math.abs(speechResultNum - phraseNum);
+var score = (100 - gap)-15;
+
     if(speechResult === phrase) {
-      resultPara.textContent = 'I heard the correct phrase!';
+      resultPara.textContent = '짝짝짝~ 정확하게 발음했습니다~!';
       resultPara.style.background = 'lime';
+      correct ++;
+      total ++;
+
     } else {
-      resultPara.textContent = 'That didn\'t sound right.';
+      resultPara.textContent = '제대로 발음이 인식되지 않았어요.  원어민 음성 일치율은 '+score+'% 입니다~!';
       resultPara.style.background = 'red';
+      total ++;
     }
 
-    console.log('Confidence: ' + event.results[0][0].confidence);
+ var totalValue=document.getElementById("total");
+ totalValue.innerHTML = "응답한 문장 수 : " + total;
+ var correctValue=document.getElementById("correct");
+ correctValue.innerHTML = "맞힌 문장 수 : " + correct;
+
+if (total === 6) {
+var r=confirm("문장을 모두 발화하셨습니다~! 다시하려면 ok 버튼을 누르세요!");
+if (r== true) {
+  phrasePara.textContent = '학습할 문장';
+  resultPara.textContent = '정/오답 확인';
+  resultPara.style.background = 'rgba(0,0,0,0.2)';
+  diagnosticPara.textContent = '실제 발화한 문장';
+  location.reload();
+
+ // totalValue.innerHTML = "응답한 문장 수 : " + 0;
+ // correctValue.innerHTML = "맞힌 문장 수 : " + 0;
+
+} else {
+  window.location.href="../index.html";
+}
+}
+  console.log('Confidence: ' + event.results[0][0].confidence);
   }
 
   recognition.onspeechend = function() {
     recognition.stop();
     testBtn.disabled = false;
-    testBtn.textContent = 'Start new test';
+    testBtn.textContent = '새로운 문장 낭독하기';
   }
 
   recognition.onerror = function(event) {
     testBtn.disabled = false;
-    testBtn.textContent = '새 문장 낭독하기';
-    diagnost: ' + event.error;
+    testBtn.textContent = '새로운 문장 낭독하기';
+    diagnosticPara.textContent = 'Error occurred in recognition: ' + event.error;
   }
 
   recognition.onaudiostart = function(event) {
