@@ -7,10 +7,11 @@ var total = 0;
 var phrases = [
 'A boy had a pet fly',
 'He named him Fly Guy',
-'Fly Guy could say the boy\’s name',
-'One day Fly Guy went to school with Buzz',
-'Fly Guy learned about reading and phonics',
-'He learned about art'
+'He could say the boy\’s name',
+'One day he went to school with Buzz',
+'He learned about reading and phonics',
+'He learned about art',
+''
 ];
 
 var phrasePara = document.querySelector('.phrase');
@@ -18,19 +19,32 @@ var resultPara = document.querySelector('.result');
 var diagnosticPara = document.querySelector('.output');
 var testBtn = document.querySelector('button');
 
-// function randomPhrase() {
-//   var number = Math.floor(Math.random() * phrases.length);
-//   return number;
-// }
+
 var i=0;
 function testSpeech() {
+
+  var phrase=phrases[i];
+  phrase = phrase.toLowerCase();
+  var phraseNum=phrase.length;
+  i ++;
+
+  if (i > 6) {
+  var r=confirm("문장을 모두 발화하셨습니다~! 다시하려면 ok 버튼을 누르세요!");
+  if (r== true) {
+    phrasePara.textContent = '학습할 문장';
+    resultPara.textContent = '정/오답 확인';
+    resultPara.style.background = 'rgba(0,0,0,0.2)';
+    diagnosticPara.textContent = '실제 발화한 문장';
+    location.reload();
+
+  } else {
+    window.location.href="../index.html";
+  }
+  }
+
   testBtn.disabled = true;
   testBtn.textContent = '녹음 인식 중';
 
-
-var phrase=phrases[i];
-var phraseNum=phrase.length;
-i ++;
   // To ensure case consistency while checking with the returned output text
   phrase = phrase.toLowerCase();
   phrasePara.textContent = phrase;
@@ -53,9 +67,26 @@ i ++;
    var speechResult = event.results[0][0].transcript.toLowerCase();
     diagnosticPara.textContent = '음성인식 결과: ' + speechResult + '.';
 
-var speechResultNum=speechResult.length;
-var gap =Math.abs(speechResultNum - phraseNum);
-var score = (100 - gap)-15;
+    var phraseSplit=phrase.split(" ");
+    var phraseLen=phraseSplit.length;
+    var j=0;
+    var array = speechResult.split(" ");
+    for (var k=0; k<array.length;k++) {
+    var word = array[k]; //발화 문장에 있는 개별 단어 담기
+    var result = phrase.includes(word); //발화 문장 단어 원본 문장과 비교
+     if (result) {
+       j=j+1
+     }
+
+    }
+
+    console.log(result);
+    console.log(j);
+    console.log(phraseLen);
+
+    var score = Math.round((j/phraseLen) *100);
+    console.log(score);
+
 
     if(speechResult === phrase) {
       resultPara.textContent = '짝짝짝~ 정확하게 발음했습니다~!';
@@ -64,32 +95,18 @@ var score = (100 - gap)-15;
       total ++;
 
     } else {
-      resultPara.textContent = '제대로 발음이 인식되지 않았어요.  원어민 음성 일치율은 '+score+'% 입니다~!';
+
+      resultPara.textContent = '제대로 발음이 인식되지 않았어요.  원어민 음성 일치율은 '+ score+'% 입니다~!';
       resultPara.style.background = 'red';
       total ++;
     }
 
  var totalValue=document.getElementById("total");
- totalValue.innerHTML = "응답한 문장 수 : " + total;
+ totalValue.innerHTML = "응답한 문장 수/전체 문장 수 : " + total +" / 6" ;
  var correctValue=document.getElementById("correct");
  correctValue.innerHTML = "맞힌 문장 수 : " + correct;
 
-if (total === 6) {
-var r=confirm("문장을 모두 발화하셨습니다~! 다시하려면 ok 버튼을 누르세요!");
-if (r== true) {
-  phrasePara.textContent = '학습할 문장';
-  resultPara.textContent = '정/오답 확인';
-  resultPara.style.background = 'rgba(0,0,0,0.2)';
-  diagnosticPara.textContent = '실제 발화한 문장';
-  location.reload();
 
- // totalValue.innerHTML = "응답한 문장 수 : " + 0;
- // correctValue.innerHTML = "맞힌 문장 수 : " + 0;
-
-} else {
-  window.location.href="../index.html";
-}
-}
   console.log('Confidence: ' + event.results[0][0].confidence);
   }
 
