@@ -7,7 +7,7 @@ var total = 0;
 var phrases = [
 'A boy had a pet fly',
 'He named him Fly Guy',
-'He could say the boy\’s name',
+'He could say the boy\'s name',
 'One day he went to school with Buzz',
 'He learned about reading and phonics',
 'He learned about art',
@@ -105,6 +105,10 @@ function testSpeech() {
  totalValue.innerHTML = "응답한 문장 수/전체 문장 수 : " + total +" / 6" ;
  var correctValue=document.getElementById("correct");
  correctValue.innerHTML = "맞힌 문장 수 : " + correct;
+ var scoreValue=document.getElementById("score").value;
+ scoreValue.innerHTML = score;
+ console.log(scoreValue.innerHTML);
+
 
 
   console.log('Confidence: ' + event.results[0][0].confidence);

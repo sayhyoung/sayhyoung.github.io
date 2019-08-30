@@ -3,38 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width">
+    <!-- <meta name="viewport" content="width=device-width"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Sacramento&display=swap" rel="stylesheet">
+
 
     <title>Phrase matcher</title>
-
     <link rel="stylesheet" href="style.css">
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+
   </head>
 
   <body>
     <h1>문장 음성 인식 테스트</h1>
-<!--<button id="mainPage" onclick="myMainpage"> 메뉴 화면 가기 </button>
-<button id="close" onclick="myClose"> 종료하기 </button>
--->
+
     <p>아래 버튼을 누르고 제시된 문장을 낭독하세요~!</p>
 
     <button id="reading">새로운 문장 낭독하기</button>
 <!-- <button onclick="window.location.href = '../index.html';">메인 화면 가기</button> -->
-<a href="../index.html">메인 화면 가기</a>
+<a style="margin-left:10px" href="../index.html">🏡 Go back to main</a>
 
 
-    <div>
 
+    <div class="main">
         <p class="phrase">학습할 문장</p>
         <p class="result">정/오답 확인</p>
         <p class="output">실제 발화한 문장</p>
+        <!-- <p class="score">문장 일치율 <progress id="score" value = "0" max = "100"/></p> -->
+
         <p id="total">응답한 문장 수</p>
         <p id="correct">맞힌 문장 수</p>
-
     </div>
+
 
     <script src="script.js"></script>
   </body>
+
+
 </html>
